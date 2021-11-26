@@ -86,7 +86,7 @@
 							"// Create customer invalid BVN nunber\r",
 							"pm.test(\"Create Customer Invalid BVN no\", function () \r",
 							"{    pm.expect(jsonData.validation.bvn_number).to.eql\r",
-							"(\"bvn_number must be 10\");\r",
+							"(\"bvn number can only be valid 10 digit\");\r",
 							"\r",
 							"\r",
 							"});"
@@ -151,7 +151,7 @@
 							"pm.test(\"Your test name\", function ()\r",
 							" {\r",
 							" \r",
-							"    pm.expect(jsonData.validation.disbursement_date).to.eql(25/08/2020);\r",
+							"    pm.expect(jsonData.validation.disbursement_date).to.eql(\"disbursement_date date supplied is invalid - use date format DD/MM/YYYY only\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -273,7 +273,7 @@
 							"\r",
 							"// Create customer invalid guarantor_telephone\r",
 							"pm.test(\"Create Customer invalid guarantor_telephone\", function () \r",
-							"{    pm.expect(jsonData.validation.user_telephone).to.eql(\"guarantor_telephone number must be 10\");\r",
+							"{    pm.expect(jsonData.validation.guarantor_telephone).to.eql(\"guarantor_telephone number must be 10\");\r",
 							"\r",
 							"});"
 						],
@@ -335,7 +335,7 @@
 							"\r",
 							"pm.test(\"Entry with no data\", function () {\r",
 							"  \r",
-							"    pm.expect(jsonData.value).to.eql(0);\r",
+							"    pm.expect(jsonData.error).to.eql(\"invalid reference provided\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -392,20 +392,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var jsonData = pm.response.json();\r",
+							" const jsonData = pm.response.json();\r",
 							"\r",
-							"pm.test(\"Empty Email Address\", function () \r",
-							"{\r",
-							"    pm.expect(jsonData.validation.email).to.eql(0);\r",
+							"pm.test(\"Create customer with only ref\", function () {\r",
+							"   \r",
+							"    pm.expect(jsonData.validation.bvn_number).to.eql(\"bvn number can only be valid 10 digit\");\r",
 							"\r",
-							"     pm.expect(jsonData.validation.gender).to.eql(0);\r",
-							"     \r",
-							"     pm.expect(jsonData.validation.guarantor_name).to.eql(0);\r",
-							"\r",
-							"     pm.expect(jsonData.validation.name).to.eql(0);\r",
-							"\r",
-							"     pm.expect(jsonData.validation.loan_id).to.eql(0);\r",
-							"});"
+							"    });"
 						],
 						"type": "text/javascript"
 					}
@@ -434,6 +427,68 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"reference\": \"ref869711\",\n    \"loan_id\": \"\",\n    \"name\": \"\",\n    \"account_number\": \"\",\n    \"bank_name\": \"\",\n    \"bvn_telephone\": \"\",\n    \"disbursement_date\": \"\",\n    \"due_date\": \"\",\n    \"guarantor_name\": \"\",\n    \"guarantor_telephone\": \"\",\n    \"principal_amount\": 50000,\n    \"interest_amount\": 5500,\n     \"amount_repaid\": 0,\n    \"sign_up_telephone\": \"\",\n    \"total_amount_to_repay\": 50000,\n    \"user_telephone\": \"\",\n    \"email\": \"\",\n    \"bvn_number\": \"\",\n     \"gender\": \"\",\n    \"late_fees\": 30.00,\n    \"date_of_birth\": \"\",\n    \"employer_name\": \"\",\n    \"user_id\": \"\"\n}"
+				},
+				"url": {
+					"raw": "https://staging-backend.bfree.com.ng/api/v1/partner/customer",
+					"protocol": "https",
+					"host": [
+						"staging-backend",
+						"bfree",
+						"com",
+						"ng"
+					],
+					"path": [
+						"api",
+						"v1",
+						"partner",
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Customer with no mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Create customer no email\", function () {\r",
+							"   \r",
+							"    pm.expect(jsonData.validation.email).to.eql(\"email cannot be empty\");\r",
+							"\r",
+							"    });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "NAOZBA7HHFLASJTWCYNJ"
+					},
+					{
+						"key": "x-signature",
+						"value": "d82561e5d13f5089de4904f84b8f4f863f241bf981d6464974d0829935b39d3f"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "2bddbdc6-dd9d-4378-b90e-893907ef2c71=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzg0NDE1MDAsImlkIjoiMmJkZGJkYzYtZGQ5ZC00Mzc4LWI5MGUtODkzOTA3ZWYyYzcxIiwib3JpZ19pYXQiOjE2Mzc1Nzc1MDB9.ogAd8syhxe7Ief1wAa3w7XeSPPAdJ6nPdmFVLHPFszQ; 4c1be7b6-c937-448d-b173-56e11d60aabb=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzg0NDE1MDQsImlkIjoiNGMxYmU3YjYtYzkzNy00NDhkLWIxNzMtNTZlMTFkNjBhYWJiIiwib3JpZ19pYXQiOjE2Mzc1Nzc1MDR9.zpQISiAISY302wrLSSwnULFRVTp9wkgLpQHWXZc6D4U; 7e05faa1-8393-463f-8f53-89509b6f8230=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzg0NDE1MDksImlkIjoiN2UwNWZhYTEtODM5My00NjNmLThmNTMtODk1MDliNmY4MjMwIiwib3JpZ19pYXQiOjE2Mzc1Nzc1MDl9.pyH2qeUksgpBGYJ9VdJEPGQuwHDKvwDpKLgRnwBT0s4; a91ee13a-9d61-4244-8f81-0bd7986fda74=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzg0NDE1MTUsImlkIjoiYTkxZWUxM2EtOWQ2MS00MjQ0LThmODEtMGJkNzk4NmZkYTc0Iiwib3JpZ19pYXQiOjE2Mzc1Nzc1MTV9.aG-DFQRu7Hs9y8J7dY2Z2776HVvLWURd6Y1I14mi8JQ"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"reference\": \"ref869711\",\n    \"loan_id\": \"909419\",\n    \"name\": \"Ruth Kadiri\",\n    \"account_number\": \"23456727670\",\n    \"bank_name\": \"UBA\",\n    \"bvn_telephone\": \"9056781399\",\n    \"disbursement_date\": \"25/08/2020\",\n    \"due_date\": \"01/01/2021\",\n    \"guarantor_name\": \"Anibaba Saliu\",\n    \"guarantor_telephone\": \"8021200108\",\n    \"principal_amount\": 50000,\n    \"interest_amount\": 5500,\n     \"amount_repaid\": 0,\n    \"sign_up_telephone\": \"9056781399\",\n    \"total_amount_to_repay\": 50000,\n    \"user_telephone\": \"9056781390\",\n    \"email\": \"\",\n    \"bvn_number\": \"2225676540\",\n     \"gender\": \"male\",\n    \"late_fees\": 30.00,\n    \"date_of_birth\": \"01/01/1997\",\n    \"employer_name\": \"LALA\",\n    \"user_id\": \"12345332233\"\n}"
 				},
 				"url": {
 					"raw": "https://staging-backend.bfree.com.ng/api/v1/partner/customer",
