@@ -618,67 +618,6 @@
 				}
 			},
 			"response": []
-		},
-		{
-			"name": "Create Customer with no acct number",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"const jsonData = pm.response.json();\r",
-							"\r",
-							"pm.test(\"Your test name\", function () {\r",
-							"    \r",
-							"    pm.expect(jsonData.validation.account_number).to.eql(\"\");\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "x-api-key",
-						"value": "NAOZBA7HHFLASJTWCYNJ"
-					},
-					{
-						"key": "x-signature",
-						"value": "d82561e5d13f5089de4904f84b8f4f863f241bf981d6464974d0829935b39d3f"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Cookie",
-						"value": "2bddbdc6-dd9d-4378-b90e-893907ef2c71=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzg0NDE1MDAsImlkIjoiMmJkZGJkYzYtZGQ5ZC00Mzc4LWI5MGUtODkzOTA3ZWYyYzcxIiwib3JpZ19pYXQiOjE2Mzc1Nzc1MDB9.ogAd8syhxe7Ief1wAa3w7XeSPPAdJ6nPdmFVLHPFszQ; 4c1be7b6-c937-448d-b173-56e11d60aabb=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzg0NDE1MDQsImlkIjoiNGMxYmU3YjYtYzkzNy00NDhkLWIxNzMtNTZlMTFkNjBhYWJiIiwib3JpZ19pYXQiOjE2Mzc1Nzc1MDR9.zpQISiAISY302wrLSSwnULFRVTp9wkgLpQHWXZc6D4U; 7e05faa1-8393-463f-8f53-89509b6f8230=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzg0NDE1MDksImlkIjoiN2UwNWZhYTEtODM5My00NjNmLThmNTMtODk1MDliNmY4MjMwIiwib3JpZ19pYXQiOjE2Mzc1Nzc1MDl9.pyH2qeUksgpBGYJ9VdJEPGQuwHDKvwDpKLgRnwBT0s4; a91ee13a-9d61-4244-8f81-0bd7986fda74=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzg0NDE1MTUsImlkIjoiYTkxZWUxM2EtOWQ2MS00MjQ0LThmODEtMGJkNzk4NmZkYTc0Iiwib3JpZ19pYXQiOjE2Mzc1Nzc1MTV9.aG-DFQRu7Hs9y8J7dY2Z2776HVvLWURd6Y1I14mi8JQ"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"reference\": \"ref869711\",\n    \"loan_id\": \"909419\",\n    \"name\": \"Ruth Kadiri\",\n    \"account_number\": \"\",\n    \"bank_name\": \"UBA\",\n    \"bvn_telephone\": \"9056781399\",\n    \"disbursement_date\": \"25/08/2020\",\n    \"due_date\": \"01/01/2021\",\n    \"guarantor_name\": \"Anibaba Saliu\",\n    \"guarantor_telephone\": \"8021200108\",\n    \"principal_amount\": 50000,\n    \"interest_amount\": 5500,\n     \"amount_repaid\": 0,\n    \"sign_up_telephone\": \"9056781399\",\n    \"total_amount_to_repay\": 50000,\n    \"user_telephone\": \"9056781390\",\n    \"email\": \"oolajide91@yahoo.com\",\n    \"bvn_number\": \"2225676540\",\n     \"gender\": \"male\",\n    \"late_fees\": 30.00,\n    \"date_of_birth\": \"01/01/1997\",\n    \"employer_name\": \"LALA\",\n    \"user_id\": \"12345332233\"\n}"
-				},
-				"url": {
-					"raw": "https://staging-backend.bfree.com.ng/api/v1/partner/customer",
-					"protocol": "https",
-					"host": [
-						"staging-backend",
-						"bfree",
-						"com",
-						"ng"
-					],
-					"path": [
-						"api",
-						"v1",
-						"partner",
-						"customer"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }
